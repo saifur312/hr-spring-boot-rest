@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HrmReactApplication {
+public class HrmRestApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HrmReactApplication.class, args);
+		SpringApplication.run(HrmRestApplication.class, args);
 	}
 
 }
