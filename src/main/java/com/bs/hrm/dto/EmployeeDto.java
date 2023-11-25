@@ -14,6 +14,8 @@ import java.util.Arrays;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,51 +26,103 @@ import lombok.NoArgsConstructor;
 public class EmployeeDto {
 	
 	private long 			employeeId;
+
+	@JsonProperty("NID")
 	private	String 			NID;
+	@JsonProperty("fingerId")
 	private	String 			fingerId;
+	
+	@JsonProperty("fullName")
 	private String  		fullName;
+	@JsonProperty("nickName")
  	private String	    	nickName;
+	
+	@JsonProperty("departmentId")
  	private int	    		departmentId;
+	@JsonProperty("sectionId")
  	private int	    		sectionId;
+	
+	//@JsonProperty("jobId")
  	private int	    		jobId;
+	//@JsonProperty("categoryId")
  	private int	    		categoryId;
+	//@JsonProperty("addressId")
  	private int	    		addressId;
-	private String	    	religion;
+	
+	@JsonProperty("gender")
 	private String	    	gender;
+	@JsonProperty("religion")
+	private String	    	religion;
+	@JsonProperty("mobileNo")
  	private String	    	mobileNo;
+	//@JsonProperty("landPhone")
  	private String	    	landPhone;
+	@JsonProperty("email")
  	private String	    	email;
+	@JsonProperty("tin")
  	private String	    	tin;
- 	private int	    		pfID;
- 	private LocalDate		pfJoinDate;
+	
+	//@JsonProperty("dob")
 	private LocalDate		dob;
- 	private String			pfJoinDateStr;
+	@JsonProperty("dobStr")
 	private String			dobStr;
 	private int				age;
+
  	private LocalDate		appliacationDate;
- 	private LocalDate		interviewDate;
- 	private LocalDate		joinDate;
- 	private LocalDate		confirmDate;
- 	private LocalDate		finalSettleDate;
- 	private LocalDate		incrementDate;
- 	private LocalDate		promotionDate;
- 	private LocalDate		retiermentDate;
+ 	@JsonProperty("appliacationDateStr")
  	private String			appliacationDateStr;
+ 	
+ 	private LocalDate		interviewDate;
+ 	@JsonProperty("interviewDateStr")
  	private String			interviewDateStr;
- 	private String			joinDateStr;
+ 	
+ 	private LocalDate		confirmDate;
+ 	@JsonProperty("confirmDateStr")
  	private String			confirmDateStr;
- 	private String			finalSettleDateStr;
+ 	
+ 	private LocalDate		joinDate;
+ 	@JsonProperty("joinDateStr")
+ 	private String			joinDateStr;
+ 	
+ 	private LocalDate		incrementDate;
+ 	@JsonProperty("incrementDateStr")
  	private String			incrementDateStr;
+ 	
+ 	private LocalDate		promotionDate;
+ 	@JsonProperty("promotionDateStr")
  	private String			promotionDateStr;
+ 	
+ 	private LocalDate		retiermentDate;
+ 	@JsonProperty("retiermentDateStr")
  	private String			retiermentDateStr;
+	
+	@JsonProperty("pfID")
+ 	private int	    		pfID;
+ 	private LocalDate		pfJoinDate;
+	@JsonProperty("pfJoinDateStr")
+ 	private String			pfJoinDateStr;
+	
+ 	private LocalDate		finalSettleDate;
+ 	private String			finalSettleDateStr;
+
+	@JsonProperty("nationality")
  	private String	    	nationality;
+	@JsonProperty("emergencyContact")
  	private String	    	emergencyContact;
+	@JsonProperty("bloodGroup")
  	private String	    	bloodGroup;
+	@JsonProperty("maritalStatus")
  	private String	    	maritalStatus;
+	@JsonProperty("basicSalary")
  	private Double	    	basicSalary;
+	@JsonProperty("grade")
  	private int	    		grade;
- 	private int	        	leaveBalance;
+ 	@JsonProperty("status")
  	private String	    	status;
+ 	@JsonProperty("leaveBalance")
+ 	private int	        	leaveBalance;
+ 	
+ 	
 	private byte[] 			employeeImage;
     private MultipartFile 	imageFile;
  	private String	    	filler1;
@@ -76,6 +130,8 @@ public class EmployeeDto {
  	private String	    	filler3;
  	private String	    	filler4;
  	private String	    	filler5;
+ 	
+ 	
  	private LocalDateTime   createdDate;
  	private String	    	createdBy;
  	private String	    	createdIp;
