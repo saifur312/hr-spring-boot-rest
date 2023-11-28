@@ -89,8 +89,14 @@ public class SectionController {
 	
 	@GetMapping("/section-list")
 	public List<Section> showSectionList(Model model) {
-		model.addAttribute("sectionList", sectionService.getAllSection());
+		
 		return sectionService.getAllSection();
+	}
+	
+	@PostMapping("/section-list-deptarmentwise")
+	public List<Section> showSectionList(@RequestBody Section request) {
+		System.out.println("department ID:\t" + request.getDepartmentId());
+		return sectionService.getAllSectionByDepartmentId(request.getDepartmentId());
 	}
 
 }

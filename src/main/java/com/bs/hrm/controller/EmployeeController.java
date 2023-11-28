@@ -10,24 +10,30 @@ package com.bs.hrm.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.bs.hrm.dto.EmployeeDto;
 import com.bs.hrm.dto.EmployeeSub;
 import com.bs.hrm.entity.Employee;
+import com.bs.hrm.entity.Section;
 import com.bs.hrm.service.DepartmentService;
 import com.bs.hrm.service.EmployeeService;
 import com.bs.hrm.service.SectionService;
 
-@Controller
+
+@RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class EmployeeController {
 
 	@Autowired EmployeeService 		employeeService;
@@ -138,5 +144,23 @@ public class EmployeeController {
 //		return employeeSub;
 //	
 //	}
+	
+	@PostMapping("employee-add-save")
+	public String saveEmployee(@RequestBody EmployeeDto empRequest) {
+		System.out.println(empRequest);
+		//employeeService.addEmployee(employeeDto);
+		EmployeeDto empDto = new EmployeeDto(empRequest);
+//		Employee employee = new Employee();
+//		BeanUtils.copyProperties(empRequest, employee);
+		System.out.println(empDto);
+		employeeService.addEmployee(empDto);
+		return "Data saved successfull";
+	}
+	
+	@GetMapping("employee-details")
+	public EmployeeDto showEmployeeDetails(@RequestParam Long id) {
+		EmployeeDto empDto = employeeService.getEmployee(id);
+		return empDto;
+	}
 	
 }

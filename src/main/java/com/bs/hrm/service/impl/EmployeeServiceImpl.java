@@ -90,9 +90,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 		employee.setCreatedDate(LocalDateTime.now()); 
 		// saveAndFlush  used as a trail basis, otherwise use save()
 		
-		  Employee savedEmployee = employeeRepo.saveAndFlush(employee); EmployeeDto
-		  savedEmployeeDto = new EmployeeDto(); BeanUtils.copyProperties(savedEmployee,
-		  savedEmployeeDto); return savedEmployeeDto;
+		  Employee savedEmployee = employeeRepo.saveAndFlush(employee); 
+		  EmployeeDto savedEmployeeDto = new EmployeeDto(); 
+		  BeanUtils.copyProperties(savedEmployee, savedEmployeeDto); 
+		  return savedEmployeeDto;
 		 
 			/*
 			 * ageCalculator(LocalDate.parse(employeeDto.getDobStr(), formatter)); return

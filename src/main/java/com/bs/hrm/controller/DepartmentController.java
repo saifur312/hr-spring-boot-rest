@@ -96,7 +96,7 @@ public class DepartmentController {
 	@GetMapping("/dept-list")
 	public List<Department> showDepartmentList(Model model) {
 		List<Department> deptList = departmentService.getAllDepartment();
-		deptList.forEach(System.out::println);
+		//deptList.forEach(System.out::println);
 		return deptList;
 	}
 

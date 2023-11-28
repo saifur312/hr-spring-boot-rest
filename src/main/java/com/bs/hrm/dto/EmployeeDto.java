@@ -103,6 +103,7 @@ public class EmployeeDto {
  	private String			pfJoinDateStr;
 	
  	private LocalDate		finalSettleDate;
+	@JsonProperty("finalSettleDateStr")
  	private String			finalSettleDateStr;
 
 	@JsonProperty("nationality")
@@ -154,7 +155,7 @@ public class EmployeeDto {
 			LocalDateTime updatedDate, String updatedBy, String updatedIp) {
 		super();
 		this.employeeId = employeeId;
-		NID = nID;
+		this.NID = nID;
 		this.fingerId = fingerId;
 		this.fullName = fullName;
 		this.nickName = nickName;
@@ -215,6 +216,69 @@ public class EmployeeDto {
 	}
 	public EmployeeDto() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public EmployeeDto(EmployeeDto empDto) {
+	    this.employeeId = empDto.employeeId;
+	    this.NID = empDto.NID;
+	    this.fingerId = empDto.fingerId;
+	    this.fullName = empDto.fullName;
+	    this.nickName = empDto.nickName;
+	    this.departmentId = empDto.departmentId;
+	    this.sectionId = empDto.sectionId;
+	    this.jobId = empDto.jobId;
+	    this.categoryId = empDto.categoryId;
+	    this.addressId = empDto.addressId;
+	    this.religion = empDto.religion;
+	    this.gender = empDto.gender;
+	    this.mobileNo = empDto.mobileNo;
+	    this.landPhone = empDto.landPhone;
+	    this.email = empDto.email;
+	    this.tin = empDto.tin;
+	    this.pfID = empDto.pfID;
+	    this.pfJoinDate = empDto.pfJoinDate;
+	    this.dob = empDto.dob;
+	    this.pfJoinDateStr = empDto.pfJoinDateStr;
+	    this.dobStr = empDto.dobStr;
+	    this.age = empDto.age;
+	    this.appliacationDate = empDto.appliacationDate;
+	    this.interviewDate = empDto.interviewDate;
+	    this.joinDate = empDto.joinDate;
+	    this.confirmDate = empDto.confirmDate;
+	    this.finalSettleDate = empDto.finalSettleDate;
+	    this.incrementDate = empDto.incrementDate;
+	    this.promotionDate = empDto.promotionDate;
+	    this.retiermentDate = empDto.retiermentDate;
+	    this.appliacationDateStr = empDto.appliacationDateStr;
+	    this.interviewDateStr = empDto.interviewDateStr;
+	    this.joinDateStr = empDto.joinDateStr;
+	    this.confirmDateStr = empDto.confirmDateStr;
+	    this.finalSettleDateStr = empDto.finalSettleDateStr;
+	    this.incrementDateStr = empDto.incrementDateStr;
+	    this.promotionDateStr = empDto.promotionDateStr;
+	    this.retiermentDateStr = empDto.retiermentDateStr;
+	    this.nationality = empDto.nationality;
+	    this.emergencyContact = empDto.emergencyContact;
+	    this.bloodGroup = empDto.bloodGroup;
+	    this.maritalStatus = empDto.maritalStatus;
+	    this.basicSalary = empDto.basicSalary;
+	    this.grade = empDto.grade;
+	    this.leaveBalance = empDto.leaveBalance;
+	    this.status = empDto.status;
+	    this.employeeImage = empDto.employeeImage;
+	    this.imageFile = empDto.imageFile;
+	    this.filler1 = empDto.filler1;
+	    this.filler2 = empDto.filler2;
+	    this.filler3 = empDto.filler3;
+	    this.filler4 = empDto.filler4;
+	    this.filler5 = empDto.filler5;
+	    this.createdDate = empDto.createdDate;
+	    this.createdBy = empDto.createdBy;
+	    this.createdIp = empDto.createdIp;
+	    this.updatedDate = empDto.updatedDate;
+	    this.updatedBy = empDto.updatedBy;
+	    this.updatedIp = empDto.updatedIp;
+				
 	}
 	public long getEmployeeId() {
 		return employeeId;
@@ -572,26 +636,86 @@ public class EmployeeDto {
 	}
 	@Override
 	public String toString() {
-		return "EmployeeDto [employeeId=" + employeeId + ", NID=" + NID + ", fingerId=" + fingerId + ", fullName="
-				+ fullName + ", nickName=" + nickName + ", departmentId=" + departmentId + ", sectionId=" + sectionId
-				+ ", jobId=" + jobId + ", categoryId=" + categoryId + ", addressId=" + addressId + ", religion="
-				+ religion + ", gender=" + gender + ", mobileNo=" + mobileNo + ", landPhone=" + landPhone + ", email="
-				+ email + ", tin=" + tin + ", pfID=" + pfID + ", pfJoinDate=" + pfJoinDate + ", dob=" + dob
-				+ ", pfJoinDateStr=" + pfJoinDateStr + ", dobStr=" + dobStr + ", age=" + age + ", appliacationDate="
-				+ appliacationDate + ", interviewDate=" + interviewDate + ", joinDate=" + joinDate + ", confirmDate="
-				+ confirmDate + ", finalSettleDate=" + finalSettleDate + ", incrementDate=" + incrementDate
-				+ ", promotionDate=" + promotionDate + ", retiermentDate=" + retiermentDate + ", appliacationDateStr="
-				+ appliacationDateStr + ", interviewDateStr=" + interviewDateStr + ", joinDateStr=" + joinDateStr
-				+ ", confirmDateStr=" + confirmDateStr + ", finalSettleDateStr=" + finalSettleDateStr
-				+ ", incrementDateStr=" + incrementDateStr + ", promotionDateStr=" + promotionDateStr
-				+ ", retiermentDateStr=" + retiermentDateStr + ", nationality=" + nationality + ", emergencyContact="
-				+ emergencyContact + ", bloodGroup=" + bloodGroup + ", maritalStatus=" + maritalStatus
-				+ ", basicSalary=" + basicSalary + ", grade=" + grade + ", leaveBalance=" + leaveBalance + ", status="
-				+ status + ", employeeImage=" + Arrays.toString(employeeImage) + ", imageFile=" + imageFile
-				+ ", filler1=" + filler1 + ", filler2=" + filler2 + ", filler3=" + filler3 + ", filler4=" + filler4
-				+ ", filler5=" + filler5 + ", createdDate=" + createdDate + ", createdBy=" + createdBy + ", createdIp="
-				+ createdIp + ", updatedDate=" + updatedDate + ", updatedBy=" + updatedBy + ", updatedIp=" + updatedIp
-				+ "]";
+//		return "EmployeeDto [employeeId=" + employeeId + ", NID=" + NID + ", fingerId=" + fingerId + ", fullName="
+//				+ fullName + ", nickName=" + nickName + ", departmentId=" + departmentId + ", sectionId=" + sectionId
+//				+ ", jobId=" + jobId + ", categoryId=" + categoryId + ", addressId=" + addressId + ", religion="
+//				+ religion + ", gender=" + gender + ", mobileNo=" + mobileNo + ", landPhone=" + landPhone + ", email="
+//				+ email + ", tin=" + tin + ", pfID=" + pfID + ", pfJoinDate=" + pfJoinDate + ", dob=" + dob
+//				+ ", pfJoinDateStr=" + pfJoinDateStr + ", dobStr=" + dobStr + ", age=" + age + ", appliacationDate="
+//				+ appliacationDate + ", interviewDate=" + interviewDate + ", joinDate=" + joinDate + ", confirmDate="
+//				+ confirmDate + ", finalSettleDate=" + finalSettleDate + ", incrementDate=" + incrementDate
+//				+ ", promotionDate=" + promotionDate + ", retiermentDate=" + retiermentDate + ", appliacationDateStr="
+//				+ appliacationDateStr + ", interviewDateStr=" + interviewDateStr + ", joinDateStr=" + joinDateStr
+//				+ ", confirmDateStr=" + confirmDateStr + ", finalSettleDateStr=" + finalSettleDateStr
+//				+ ", incrementDateStr=" + incrementDateStr + ", promotionDateStr=" + promotionDateStr
+//				+ ", retiermentDateStr=" + retiermentDateStr + ", nationality=" + nationality + ", emergencyContact="
+//				+ emergencyContact + ", bloodGroup=" + bloodGroup + ", maritalStatus=" + maritalStatus
+//				+ ", basicSalary=" + basicSalary + ", grade=" + grade + ", leaveBalance=" + leaveBalance + ", status="
+//				+ status + ", employeeImage=" + Arrays.toString(employeeImage) + ", imageFile=" + imageFile
+//				+ ", filler1=" + filler1 + ", filler2=" + filler2 + ", filler3=" + filler3 + ", filler4=" + filler4
+//				+ ", filler5=" + filler5 + ", createdDate=" + createdDate + ", createdBy=" + createdBy + ", createdIp="
+//				+ createdIp + ", updatedDate=" + updatedDate + ", updatedBy=" + updatedBy + ", updatedIp=" + updatedIp
+//				+ "]";
+		
+		return "EmployeeDto [" + "\n" +
+		"employeeId=" + employeeId + "," + "NID=" + NID + "," + "fingerId=" + fingerId + "," + "fullName=" + fullName + ",\n" +
+        "nickName=" + nickName + "," +
+        "departmentId=" + departmentId + "," +
+        "sectionId=" + sectionId + "," +
+        "jobId=" + jobId + ",\n" +
+        "categoryId=" + categoryId + "," +
+        "addressId=" + addressId + "," +
+        "religion=" + religion + "," +
+        "gender=" + gender + ",\n" +
+        "mobileNo=" + mobileNo + "," +
+        "landPhone=" + landPhone + "," +
+        "email=" + email + "," +
+        "tin=" + tin + ",\n" +
+        "dobStr=" + dobStr + "," +
+        "dob=" + dob + "," +
+        "age=" + age + "," +
+        "appliacationDateStr=" + appliacationDateStr + ",\n" +
+        "appliacationDate=" + appliacationDate + "," +
+        "interviewDateStr=" + interviewDateStr + "," +
+        "interviewDate=" + interviewDate + "," +
+        "confirmDateStr=" + confirmDateStr + ",\n" +
+        "confirmDate=" + confirmDate + "," +
+        "joinDateStr=" + joinDateStr + "," +
+        "joinDate=" + joinDate + "," +
+        "incrementDateStr=" + incrementDateStr + ",\n" +
+        "incrementDate=" + incrementDate + "," +
+        "promotionDateStr=" + promotionDateStr + "," +
+        "promotionDate=" + promotionDate + "," +
+        "retiermentDateStr=" + retiermentDateStr + ",\n" +
+        "retiermentDate=" + retiermentDate + "," +
+        "pfID=" + pfID + "," +
+        "pfJoinDateStr=" + pfJoinDateStr + "," +
+        "pfJoinDate=" + pfJoinDate + ",\n" +
+        "finalSettleDate=" + finalSettleDate + "," +
+        "finalSettleDateStr=" + finalSettleDateStr + "," +
+        "nationality=" + nationality + "," +
+        "emergencyContact=" + emergencyContact + ",\n" +
+        "bloodGroup=" + bloodGroup + "," +
+        "maritalStatus=" + maritalStatus + "," +
+        "basicSalary=" + basicSalary + "," +
+        "grade=" + grade + ",\n" +
+        "leaveBalance=" + leaveBalance + "," +
+        "status=" + status + "," +
+        "employeeImage=" + Arrays.toString(employeeImage) + "," +
+        "imageFile=" + imageFile + "," +
+        "filler1=" + filler1 + "," +
+        "filler2=" + filler2 + "," +
+        "filler3=" + filler3 + "," +
+        "filler4=" + filler4 + "," +
+        "filler5=" + filler5 + ",\n" +
+        "createdDate=" + createdDate + "," +
+        "createdBy=" + createdBy + "," +
+        "createdIp=" + createdIp + "," +
+        "updatedDate=" + updatedDate + "," +
+        "updatedBy=" + updatedBy + "," +
+        "updatedIp=" + updatedIp 
+		+ "]";
+		
 	}
  	
  	
