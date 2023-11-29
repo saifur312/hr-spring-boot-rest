@@ -134,7 +134,7 @@ public class EmployeeTestController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:3000")
-	@GetMapping("empliyee-list-react")
+	@GetMapping("employee-list")
 	public List<EmployeeDto> getEmployeeList( )  {
 
 		//System.out.println("Menu Set " + user.getUserMenuSet());
