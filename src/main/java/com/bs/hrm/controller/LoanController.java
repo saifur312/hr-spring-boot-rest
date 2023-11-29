@@ -82,12 +82,12 @@ public class LoanController {
 	}
 	
 	@PostMapping("loan-add-save")
-	public String addSaveLoan(@RequestBody Loan loanRequest) {
+	public Loan addSaveLoan(@RequestBody Loan loanRequest) {
 		logger.info("Form Data\t"+ loanRequest);
 		Loan loan = loanRequest.toBuilder().build();
-		//Loan savedLoan = loanService.addLoan(loan);
 		logger.info("copy Data\t"+ loan);
-		return "Ok";
+		Loan savedLoan = loanService.addLoan(loan);
+		return savedLoan;
 		
 	}
 	

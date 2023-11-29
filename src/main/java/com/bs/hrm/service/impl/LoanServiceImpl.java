@@ -43,6 +43,9 @@ public class LoanServiceImpl implements LoanService{
 		if(!loan.getTransactionDateStr().isEmpty() )
 			loan.setTransactionDate(LocalDate.parse(loan.getTransactionDateStr(), formatter));
 		
+		if(!loan.getLoanEndDateStr().isEmpty() )
+			loan.setLoanEndDate(LocalDate.parse(loan.getLoanEndDateStr(), formatter));
+		
 		// set create date time 
 		loan.setCreatedDate(LocalDateTime.now()); 
 		Loan savedLoan = loanRepo.saveAndFlush(loan);
