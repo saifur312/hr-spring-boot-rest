@@ -1,7 +1,9 @@
 package com.bs.hrm.service.impl;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -32,14 +34,46 @@ public class OvertimeServiceImpl implements OvertimeService{
 		
 
 		// parse date strings into LocalDate object and set to corresponding fields
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 		
-		if(!overtime.getOvertimeDateStr().isEmpty() )
-			overtime.setOvertimeDate(LocalDate.parse(overtime.getOvertimeDateStr(), formatter));
 		
+		if(!overtime.getOvertimeDateStr().isEmpty()) {
+			overtime.setOvertimeDate(LocalDate.parse(
+					overtime.getOvertimeDateStr(), dateFormatter));
+		}
+
+		LocalTime startTime = LocalTime.now();
+	    LocalTime endTime = LocalTime.now();
+	    
+		if(!overtime.getStartTimeStr().isEmpty()) {
+			startTime = LocalTime.parse(
+					overtime.getStartTimeStr(), timeFormatter);
+			overtime.setStartTime(startTime);
+		}
+		
+		if(!overtime.getEndTimeStr().isEmpty()) {
+			endTime = LocalTime.parse(
+					overtime.getEndTimeStr(), timeFormatter);
+			overtime.setEndTime(endTime);
+		}
+			
+		// Calculate duration between start and end times
+		// Here I assume that start time is before end time and both are in same date.
+        Duration duration = Duration.between(startTime, endTime);
+
+        // Get hours and minutes from the duration
+        //long hours = duration.toHours(); // Extract whole hours 
+        //duration.toMinutes() returns Total minutes in the duration
+        //long minutes = duration.toMinutes() % 60; // Remaining minutes after whole hours
+        //double hoursFraction = minutes/60; //convert minute to hour;
+        
+        //overtime.setTotalHours( (int) Math.round((double) hours + (double) hoursFraction));
+        overtime.setTotalHours( (int) Math.round(duration.toMinutes() / 60));
 		// set create date time 
 		overtime.setCreatedDate(LocalDateTime.now()); 
 		Overtime savedOvertime = overtimeRepo.saveAndFlush(overtime);
+		
 		return savedOvertime;
 	}
 

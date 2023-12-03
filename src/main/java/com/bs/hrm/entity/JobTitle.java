@@ -1,17 +1,17 @@
 package com.bs.hrm.entity;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
-import com.bs.hrm.entity.ids.LeaveId;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.bs.hrm.dto.EmployeeDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,26 +19,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@IdClass(LeaveId.class)
-@Table(name="empleave", schema="hrdb")
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-@Builder(toBuilder = true)
-public class Leave {
-	@Id
-	private Long 			employeeId;
-	@Id
-	private Long 			leaveId;
-	@Column(length=50)
-	private String 			leaveType;
-	private LocalDate		startDate;
-	private LocalDate		endDate;
-	@Transient
-	private String			startDateStr;
-	@Transient
-	private String			endDateStr;
-	private Integer			totalDays;
+@Table(name="job")
+  @NoArgsConstructor
+  @AllArgsConstructor
+  @Data @Builder(toBuilder = true)
+public class JobTitle {
+	
+	@Id @GeneratedValue
+	private Integer 		jobId;
+	@Column(length=40)
+	//jobTitle is renamed into title because of matching with Object Type name
+	private String 			title;
+	@Column(length=150)
+	private String 			description;
+	@Column(length=100)
+	private String 			responsibility;
  	private Boolean	    	status;
 	@Column(length=80)
  	private String	    	filler1;
@@ -59,7 +54,7 @@ public class Leave {
 	@Column(length=30)
  	private String	    	updatedBy;
 	@Column(length=40)
- 	private String	    	updatedIp;
+ 	private String	    	updatedIp;	
 	
 
 }

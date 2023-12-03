@@ -1,20 +1,21 @@
-package com.bs.hrm.entity;
+package com.bs.hrm.entity.ids;
 
 import java.io.Serializable;
-//Composite key class
-public class DependentsIdentity implements Serializable{
+
+public class AddressId implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private Long 			dependentsId;
+	private Long 			addressId;
 	private Long 			employeeId;
 	
-	public DependentsIdentity() {
+	public AddressId() {
+		
 	}
-	
-	public DependentsIdentity(Long dependentsId, Long employeeId) {
+
+	public AddressId(Long addressId, Long employeeId) {
 		super();
-		this.dependentsId = dependentsId;
+		this.addressId = addressId;
 		this.employeeId = employeeId;
 	}
 
@@ -22,7 +23,7 @@ public class DependentsIdentity implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((dependentsId == null) ? 0 : dependentsId.hashCode());
+		result = prime * result + ((addressId == null) ? 0 : addressId.hashCode());
 		result = prime * result + ((employeeId == null) ? 0 : employeeId.hashCode());
 		return result;
 	}
@@ -35,11 +36,11 @@ public class DependentsIdentity implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		DependentsIdentity other = (DependentsIdentity) obj;
-		if (dependentsId == null) {
-			if (other.dependentsId != null)
+		AddressId other = (AddressId) obj;
+		if (addressId == null) {
+			if (other.addressId != null)
 				return false;
-		} else if (!dependentsId.equals(other.dependentsId))
+		} else if (!addressId.equals(other.addressId))
 			return false;
 		if (employeeId == null) {
 			if (other.employeeId != null)
@@ -49,11 +50,11 @@ public class DependentsIdentity implements Serializable{
 		return true;
 	}
 
-	public Long getDependentsId() {
-		return dependentsId;
+	public Long getAddressId() {
+		return addressId;
 	}
-	public void setDependentsId(Long dependentsId) {
-		this.dependentsId = dependentsId;
+	public void setAddressId(Long addressId) {
+		this.addressId = addressId;
 	}
 	public Long getEmployeeId() {
 		return employeeId;
@@ -61,11 +62,10 @@ public class DependentsIdentity implements Serializable{
 	public void setEmployeeId(Long employeeId) {
 		this.employeeId = employeeId;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "DependentsIdentity [dependentsId=" + dependentsId + ", employeeId=" + employeeId + "]";
+		return "AddressId [addressId=" + addressId + ", employeeId=" + employeeId + "]";
 	}
-	
 
 }

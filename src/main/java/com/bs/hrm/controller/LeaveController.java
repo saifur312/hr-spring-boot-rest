@@ -1,5 +1,7 @@
 package com.bs.hrm.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bs.hrm.entity.Leave;
+import com.bs.hrm.entity.Leave;
 import com.bs.hrm.service.EmployeeService;
 import com.bs.hrm.service.LeaveService;
 
@@ -26,48 +29,69 @@ public class LeaveController {
 
 	public static final Logger logger = LoggerFactory.getLogger(LeaveController.class);
 	
-	@GetMapping("/leave-add")
-	public String addLeave(Model model) {
-		model.addAttribute("leave", new Leave());
-		model.addAttribute("allEmployee", employeeService.getAllEmployee());	
-		return "leave/leave";
-		
-	}
-	
+//	@GetMapping("/leave-add")
+//	public String addLeave(Model model) {
+//		model.addAttribute("leave", new Leave());
+//		model.addAttribute("allEmployee", employeeService.getAllEmployee());	
+//		return "leave/leave";
+//		
+//	}
+//	
+//	@PostMapping("leave-add-save")
+//	public String addSaveLeave(Model model, Leave leave) {
+//		logger.info("Form Data\t"+ leave);
+//		Leave savedLeave = leaveService.addLeave(leave);
+//		logger.info("after save\t"+ savedLeave);
+//		return "redirect:/leave-add";
+//		
+//	}
+//	
+//	@GetMapping("leave-list")
+//	public String showLeaveList(Model model) {
+//		return "leave/leave-list";
+//	}
+//
+//	@PostMapping("leave-list-find")
+//	public String finLeave(@RequestBody MultiValueMap<String, String> values, Model model) {
+//		System.out.println("Values:{}" + values);
+//		Object findBy = values.getFirst("findBy");
+//		String findByValue = values.getFirst("findByValue");
+//
+//		if (findBy.equals("EmployeeId")) {
+//			model.addAttribute("allLeave",
+//					leaveService.getLeavesByEmployeeId(Long.parseLong(findByValue)));
+//		}
+//		model.addAttribute("show", true);
+//		return "leave/leave-list";
+//	}
+//
+//
+//	@GetMapping("leave-details") 
+//	public String showLeaveDetails(Model model, @RequestParam Long eid, @RequestParam Long lvid ) {
+//	  
+//	  model.addAttribute("leave", leaveService.getLeave(eid, lvid));
+//		return "leave/leave";
+//	}
+
 	@PostMapping("leave-add-save")
-	public String addSaveLeave(Model model, Leave leave) {
-		logger.info("Form Data\t"+ leave);
+	public Leave saveLeave(@RequestBody Leave leaveRequest) {
+		logger.info("Form Data\t" +  leaveRequest);
+		Leave leave = leaveRequest.toBuilder().build();
+		logger.info("Copy Data\t" +  leave);
 		Leave savedLeave = leaveService.addLeave(leave);
-		logger.info("after save\t"+ savedLeave);
-		return "redirect:/leave-add";
+		return savedLeave;
 		
 	}
-	
+
 	@GetMapping("leave-list")
-	public String showLeaveList(Model model) {
-		return "leave/leave-list";
-	}
-
-	@PostMapping("leave-list-find")
-	public String finLeave(@RequestBody MultiValueMap<String, String> values, Model model) {
-		System.out.println("Values:{}" + values);
-		Object findBy = values.getFirst("findBy");
-		String findByValue = values.getFirst("findByValue");
-
-		if (findBy.equals("EmployeeId")) {
-			model.addAttribute("allLeave",
-					leaveService.getLeavesByEmployeeId(Long.parseLong(findByValue)));
-		}
-		model.addAttribute("show", true);
-		return "leave/leave-list";
+	public List<Leave> showLeaveList(@RequestParam Long employeeId) {
+		return leaveService.getLeavesByEmployeeId(employeeId);
 	}
 
 
 	@GetMapping("leave-details") 
-	public String showLeaveDetails(Model model, @RequestParam Long eid, @RequestParam Long lvid ) {
-	  
-	  model.addAttribute("leave", leaveService.getLeave(eid, lvid));
-		return "leave/leave";
+	public Leave showLeaveDetails(
+			@RequestParam Long employeeId, @RequestParam Long leaveId ) {
+		return leaveService.getLeave(employeeId, leaveId);
 	}
-
 }

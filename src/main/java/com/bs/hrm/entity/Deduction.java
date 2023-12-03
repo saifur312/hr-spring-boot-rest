@@ -1,45 +1,45 @@
+
+
 package com.bs.hrm.entity;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.validation.constraints.DecimalMin;
 
-import com.bs.hrm.entity.ids.LeaveId;
+import com.bs.hrm.entity.ids.DeductionId;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 @Entity
-@IdClass(LeaveId.class)
-@Table(name="empleave", schema="hrdb")
+@IdClass(DeductionId.class) 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-@Builder(toBuilder = true)
-public class Leave {
+@Data @Builder(toBuilder = true)
+public class Deduction {
+
 	@Id
 	private Long 			employeeId;
 	@Id
-	private Long 			leaveId;
-	@Column(length=50)
-	private String 			leaveType;
-	private LocalDate		startDate;
-	private LocalDate		endDate;
-	@Transient
-	private String			startDateStr;
-	@Transient
-	private String			endDateStr;
-	private Integer			totalDays;
- 	private Boolean	    	status;
+	private Long 			deductionId;
+	@DecimalMin(value = "0.0")
+	private BigDecimal 		roomCharge;
+	@DecimalMin(value = "0.0")
+	private BigDecimal 		incomeTax;
+	@DecimalMin(value = "0.0")
+	private BigDecimal 		providentFund;
+	@DecimalMin(value = "0.0")
+	private BigDecimal 		walefareFund;
+	@DecimalMin(value = "0.0")
+	private BigDecimal 		meal;
+	@DecimalMin(value = "0.0")
+	private BigDecimal 		otherDeductions;
 	@Column(length=80)
  	private String	    	filler1;
 	@Column(length=80)
@@ -61,5 +61,4 @@ public class Leave {
 	@Column(length=40)
  	private String	    	updatedIp;
 	
-
 }

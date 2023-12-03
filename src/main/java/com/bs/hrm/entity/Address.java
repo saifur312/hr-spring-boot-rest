@@ -1,7 +1,5 @@
 package com.bs.hrm.entity;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -9,9 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
-import com.bs.hrm.entity.ids.LeaveId;
+import com.bs.hrm.entity.ids.AddressId;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,26 +16,34 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@IdClass(LeaveId.class)
-@Table(name="empleave", schema="hrdb")
+@IdClass(AddressId.class)
+@Table(name="address")
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-@Builder(toBuilder = true)
-public class Leave {
+@Data @Builder(toBuilder = true)
+public class Address {
+	
 	@Id
+	private Long 			addressId;
+	@Id 
 	private Long 			employeeId;
-	@Id
-	private Long 			leaveId;
+	@Column(length=30)
+	private String 			addressType;
+	private Integer 		divisionCode;
+	private Integer 		districtCode;
+	private Integer 		subDistrictCode;
+	private Integer 		city;
+	private Integer 		villageCode;
+	private Integer 		postalCode;
+	private Integer 		areaCode;
+	@Column(length=80)
+	private String 			region;
 	@Column(length=50)
-	private String 			leaveType;
-	private LocalDate		startDate;
-	private LocalDate		endDate;
-	@Transient
-	private String			startDateStr;
-	@Transient
-	private String			endDateStr;
-	private Integer			totalDays;
+	private String 			roadNo;
+	@Column(length=50)
+	private String 			houseNo;
+	@Column(length=50)
+	private String 			apartmentNo;
  	private Boolean	    	status;
 	@Column(length=80)
  	private String	    	filler1;
@@ -61,5 +66,4 @@ public class Leave {
 	@Column(length=40)
  	private String	    	updatedIp;
 	
-
 }

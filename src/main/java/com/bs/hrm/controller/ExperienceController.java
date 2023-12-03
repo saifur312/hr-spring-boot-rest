@@ -2,6 +2,7 @@ package com.bs.hrm.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,72 +32,97 @@ public class ExperienceController {
 	
 	public static final Logger logger = LoggerFactory.getLogger(ExperienceController.class);
 	
-	@GetMapping("/experience-add")
-	public String addExperience(Model model) {
-		model.addAttribute("experience", new Experience());
-		model.addAttribute("allEmployee", employeeService.getAllEmployee());
-		return "employee/experience/experience";
-	}
-	
-	@PostMapping("experience-add-save")
-	public String addSaveExperience(Model model, Experience experience) {
-		logger.info("Form Data\t"+ experience);
-		experienceService.addExperience(experience);
-		return "redirect:/experience-add";
-		
-	}
-	
-	@GetMapping("experience-list")
-	public String showAllNominee(Model model) {
-		model.addAttribute("employee", new Employee());
-		return "employee/experience/explist";
-	}
-	
-	@PostMapping("/experience-list-find")
-	//@ResponseBody
-	//public String findExperiences(Employee emp, Model model) {
-	public String findExperiences(@RequestBody MultiValueMap<String, String> values, Model model) {
-		
-		//System.out.println("Values:{}" + values);
-		Object findBy		=	values.getFirst("findBy");
-        String findByValue	=	values.getFirst("findByValue");
-		System.out.println("After extract\t" + findBy + "\t" + findByValue);
-		
-		if(findBy.equals("EmployeeId")) { 
-			model.addAttribute("allExperience", experienceService
-					.getAllExperienceByEmployeeId(Long.parseLong(findByValue))); 
-		}
-		 
-
-		//Long employeeId	=	values.getFirst("employeeId");
-		/*
-		 * System.out.println("After extract\t" + emp.getEmployeeId() );
-		 * 
-		 * model.addAttribute("allExperience", experienceService
-		 * .getAllExperienceByEmployeeId(emp.getEmployeeId()));
-		 */
-		model.addAttribute("show", true);
-		return "employee/experience/explist";
-	}	
-	
-	/*
-	 * @GetMapping("experience-details") public String showExperienceDetails(Model
-	 * model, @RequestParam Long eid,
-	 * 
-	 * @RequestParam("lad") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate lad) {
-	 * 
-	 * model.addAttribute("experience", experienceService.getExperience(eid, lad));
-	 * return "employee/experience/expdet"; }
-	 */
-	
-	
-	  @GetMapping("experience-details") 
-	  public String showExperienceDetails(Model  model, @RequestParam Long eid, @RequestParam String lad) { 
-		  LocalDate lastActDate = LocalDate.parse(lad,
-			  DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		  model.addAttribute("experience", experienceService.getExperience(eid, lastActDate)); 
-		  return "employee/experience/expdet"; 
-	  }
+//	@GetMapping("/experience-add")
+//	public String addExperience(Model model) {
+//		model.addAttribute("experience", new Experience());
+//		model.addAttribute("allEmployee", employeeService.getAllEmployee());
+//		return "employee/experience/experience";
+//	}
+//	
+//	@PostMapping("experience-add-save")
+//	public String addSaveExperience(Model model, Experience experience) {
+//		logger.info("Form Data\t"+ experience);
+//		experienceService.addExperience(experience);
+//		return "redirect:/experience-add";
+//		
+//	}
+//	
+//	@GetMapping("experience-list")
+//	public String showAllNominee(Model model) {
+//		model.addAttribute("employee", new Employee());
+//		return "employee/experience/explist";
+//	}
+//	
+//	@PostMapping("/experience-list-find")
+//	//@ResponseBody
+//	//public String findExperiences(Employee emp, Model model) {
+//	public String findExperiences(@RequestBody MultiValueMap<String, String> values, Model model) {
+//		
+//		//System.out.println("Values:{}" + values);
+//		Object findBy		=	values.getFirst("findBy");
+//        String findByValue	=	values.getFirst("findByValue");
+//		System.out.println("After extract\t" + findBy + "\t" + findByValue);
+//		
+//		if(findBy.equals("EmployeeId")) { 
+//			model.addAttribute("allExperience", experienceService
+//					.getAllExperienceByEmployeeId(Long.parseLong(findByValue))); 
+//		}
+//		 
+//
+//		//Long employeeId	=	values.getFirst("employeeId");
+//		/*
+//		 * System.out.println("After extract\t" + emp.getEmployeeId() );
+//		 * 
+//		 * model.addAttribute("allExperience", experienceService
+//		 * .getAllExperienceByEmployeeId(emp.getEmployeeId()));
+//		 */
+//		model.addAttribute("show", true);
+//		return "employee/experience/explist";
+//	}	
+//	
+//	/*
+//	 * @GetMapping("experience-details") public String showExperienceDetails(Model
+//	 * model, @RequestParam Long eid,
+//	 * 
+//	 * @RequestParam("lad") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate lad) {
+//	 * 
+//	 * model.addAttribute("experience", experienceService.getExperience(eid, lad));
+//	 * return "employee/experience/expdet"; }
+//	 */
+//	
+//	
+//	  @GetMapping("experience-details") 
+//	  public String showExperienceDetails(Model  model, @RequestParam Long eid, @RequestParam String lad) { 
+//		  LocalDate lastActDate = LocalDate.parse(lad,
+//			  DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+//		  model.addAttribute("experience", experienceService.getExperience(eid, lastActDate)); 
+//		  return "employee/experience/expdet"; 
+//	  }
 	 
+	@PostMapping("experience-add-save")
+	public Experience addSaveExperience(@RequestBody Experience experienceRequest) {
+		logger.info("Form Data\t" +  experienceRequest);
+		Experience experience = experienceRequest.toBuilder().build();
+		logger.info("Copy Data\t" +  experience);
+		Experience savedExperience = experienceService.addExperience(experience);
+		return savedExperience;
+		
+	}
 
+	@GetMapping("experience-list")
+	public List<Experience> showExperienceList(@RequestParam Long employeeId) {
+		return experienceService.getAllExperienceByEmployeeId(employeeId);
+	}
+
+
+	@GetMapping("experience-details") 
+	public Experience showExperienceDetails(
+			@RequestParam Long employeeId, @RequestParam String lastActiveDateStr) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		if(!lastActiveDateStr.isEmpty())
+			return experienceService.getExperience(employeeId, 
+				LocalDate.parse(lastActiveDateStr, formatter));
+		else return null;
+	}
+	
 }

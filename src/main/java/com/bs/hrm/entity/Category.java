@@ -1,17 +1,12 @@
 package com.bs.hrm.entity;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import com.bs.hrm.entity.ids.LeaveId;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,26 +14,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@IdClass(LeaveId.class)
-@Table(name="empleave", schema="hrdb")
+@Table(name="category")  
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-@Builder(toBuilder = true)
-public class Leave {
-	@Id
-	private Long 			employeeId;
-	@Id
-	private Long 			leaveId;
-	@Column(length=50)
-	private String 			leaveType;
-	private LocalDate		startDate;
-	private LocalDate		endDate;
-	@Transient
-	private String			startDateStr;
-	@Transient
-	private String			endDateStr;
-	private Integer			totalDays;
+@Data @Builder(toBuilder = true)
+public class Category {
+	
+	@Id @GeneratedValue
+	private Integer 		categoryId;
+	@Column(length=40)
+	//category should be renamed because of matching with object name
+	private String 			categoryName;
+	@Column(length=80)
+	private String 			description;
  	private Boolean	    	status;
 	@Column(length=80)
  	private String	    	filler1;
@@ -61,5 +49,5 @@ public class Leave {
 	@Column(length=40)
  	private String	    	updatedIp;
 	
-
+	
 }

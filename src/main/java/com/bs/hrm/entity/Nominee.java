@@ -1,44 +1,47 @@
 package com.bs.hrm.entity;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.Table;
+import javax.persistence.Lob;
 import javax.persistence.Transient;
 
-import com.bs.hrm.entity.ids.LeaveId;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.bs.hrm.entity.ids.NomineeIdentity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@IdClass(LeaveId.class)
-@Table(name="empleave", schema="hrdb")
+@Entity 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-@Builder(toBuilder = true)
-public class Leave {
-	@Id
-	private Long 			employeeId;
-	@Id
-	private Long 			leaveId;
+@Data @Builder(toBuilder = true)
+public class Nominee {
+	@EmbeddedId 
+	private NomineeIdentity		nomineeIdentity;
+	@Column(length=30)
+	private	String 			NID;  //NID of nominee
 	@Column(length=50)
-	private String 			leaveType;
-	private LocalDate		startDate;
-	private LocalDate		endDate;
+	private String  		firstName;
+	@Column(length=50)
+	private String  		lastName;
+	@Column(length=50)
+	private String  		relation;
+	private Long  			addressId;
+	@Column(length=20)
+	private String  		contact;
+	@Column(length=40)
+	private String  		email;
+	private LocalDate		dob;
 	@Transient
-	private String			startDateStr;
-	@Transient
-	private String			endDateStr;
-	private Integer			totalDays;
+	private String			dobStr;
  	private Boolean	    	status;
 	@Column(length=80)
  	private String	    	filler1;
@@ -60,6 +63,10 @@ public class Leave {
  	private String	    	updatedBy;
 	@Column(length=40)
  	private String	    	updatedIp;
+	@Lob
+	private byte[] 			nomineeImage;
+	@Transient
+    private MultipartFile 	nomineeImageFile;
 	
-
+	
 }
