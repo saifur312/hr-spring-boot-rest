@@ -1,12 +1,14 @@
 package com.bs.hrm.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bs.hrm.entity.Address;
+import com.bs.hrm.entity.ids.AddressId;
 import com.bs.hrm.repos.AddressRepo;
 import com.bs.hrm.service.AddressService;
 
@@ -40,11 +42,11 @@ public class AddressServiceImpl implements AddressService{
 
 	@Override
 	public List<Address> getAllAddressByEmployeeId(Long employeeId) {
-		return null;
-		/*
-		 * List<Address> allAddress = addressRepo.findAll(); if(!allAddress.isEmpty()) {
-		 * return allAddress; }else return Collections.emptyList();
-		 */
+		  List<Address> allAddress = addressRepo.findByEmployeeId(employeeId);
+		  if(!allAddress.isEmpty()) {
+			  return allAddress; 
+		  }
+		  else return Collections.emptyList();
 	}
 
 	@Override
@@ -55,8 +57,9 @@ public class AddressServiceImpl implements AddressService{
 
 	@Override
 	public Address getAddress(Long employeeId, Long addressId) {
-		// TODO Auto-generated method stub
-		return null;
+		Address address = addressRepo.getOne(
+				new AddressId(addressId, employeeId));
+		return address;
 	}
 
 }

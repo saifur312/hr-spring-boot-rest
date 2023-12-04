@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bs.hrm.entity.Address;
 import com.bs.hrm.entity.Address;
+import com.bs.hrm.entity.Address;
 import com.bs.hrm.service.AddressService;
 import com.bs.hrm.service.EmployeeService;
 
@@ -63,6 +64,18 @@ public class AddressController {
 		Address addressSaved = addressService.addAddress(address);
 		return addressSaved;
 		
+	}
+
+	@GetMapping("address-list")
+	public List<Address> showAddressList(@RequestParam Long employeeId) {
+		return addressService.getAllAddressByEmployeeId(employeeId);
+	}
+
+
+	@GetMapping("address-details") 
+	public Address showAddressDetails(
+			@RequestParam Long employeeId, @RequestParam Long addressId ) {
+		return addressService.getAddress(employeeId, addressId);
 	}
 	
 	

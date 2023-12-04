@@ -29,13 +29,16 @@ public class Address {
 	private Long 			employeeId;
 	@Column(length=30)
 	private String 			addressType;
-	private Integer 		divisionCode;
-	private Integer 		districtCode;
-	private Integer 		subDistrictCode;
-	private Integer 		city;
-	private Integer 		villageCode;
-	private Integer 		postalCode;
-	private Integer 		areaCode;
+//	private Integer 		divisionCode;
+//	private Integer 		districtCode;
+//	private Integer 		subDistrictCode;
+	private String 			division;
+	private String 			district;
+	private String 			subDistrict;
+	private String 			city;
+	private String 			village;
+	private String 			postalCode;
+	private String 			area;
 	@Column(length=80)
 	private String 			region;
 	@Column(length=50)

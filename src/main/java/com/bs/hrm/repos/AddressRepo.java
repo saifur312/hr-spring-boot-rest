@@ -11,8 +11,10 @@ import com.bs.hrm.entity.ids.AddressId;
 @Repository
 public interface AddressRepo extends JpaRepository<Address, AddressId>{
 	
-	public List<Address>	findByEmployeeId(Long 	employeeId);
+	public List<Address> findByEmployeeId(Long employeeId);
 
-	public Address	findTopByEmployeeIdOrderByAddressIdDesc(Long employeeId);
+	public Address findTopByEmployeeIdOrderByAddressIdDesc(Long employeeId);
+	
+	public List<Address> findByEmployeeIdAndAddressId(Long employeeId, Long addressId);
 
 }
