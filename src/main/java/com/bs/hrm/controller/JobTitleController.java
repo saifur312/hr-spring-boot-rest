@@ -68,8 +68,7 @@ public class JobTitleController {
 		JobTitle jobTitle = jobTitleRequst.toBuilder().build();
 		logger.info("Copy Data\t" +  jobTitle);
 		JobTitle jobTitleSaved = jobTitleService.addJobTitle(jobTitle);
-		return jobTitleSaved;
-		
+		return jobTitleSaved;	
 	}
 	
 	@GetMapping("jobtitle-list")
@@ -80,6 +79,15 @@ public class JobTitleController {
 	@GetMapping("jobtitle-details") 
 	public JobTitle showJobTitleDetails(@RequestParam Integer jobId ) {
 		return jobTitleService.getJobTitle(jobId); 
+	}
+	
+	@PostMapping("jobtitle-update-save")
+	public JobTitle updateJobTitle(@RequestBody JobTitle jobTitleRequst) {
+		logger.info("Form Data\t" +  jobTitleRequst);
+		JobTitle jobTitle = jobTitleRequst.toBuilder().build();
+		logger.info("Copy Data\t" +  jobTitle);
+		JobTitle updatedJobTitle = jobTitleService.updateJobTitle(jobTitle);
+		return updatedJobTitle;	
 	}
 
 }
