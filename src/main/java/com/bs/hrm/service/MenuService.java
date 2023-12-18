@@ -6,9 +6,21 @@ import com.bs.hrm.entity.Menu;
 
 public interface MenuService {
 	
-	public Menu addMenu(Menu menu);
+	public Menu addFunction(Menu menu);
 	
-	public Menu getMenu(Long menuId);
+	public Menu addSystem(String systemName);
 	
-	List<Menu> getAllMenu();
+	public Menu addSubSystem(Integer systemId, String subSystemName);
+	
+//	public Menu getMenu(Long menuId);
+	
+	public List<Menu> getAllMenu();
+	
+	public List<Object[]> getAllSystemIdAndName();
+	
+	public List<Object[]> getAllSubSystemIdAndNameOfSystemId(Integer systemId);
+	
+	public List<Object[]> getAllFunctionIdAndNameofSubSystemOfSystem(Integer systemId, Integer subSystemId);
+	
+	public List<Object[]> getAllSystemWithSubSystemsAndFunctions();
 }

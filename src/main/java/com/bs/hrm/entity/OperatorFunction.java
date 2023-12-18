@@ -8,33 +8,25 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-import com.bs.hrm.entity.ids.MenuId;
+import com.bs.hrm.entity.ids.OperatorFunctionId;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="menu")
-@IdClass(MenuId.class)
-@Data @NoArgsConstructor @AllArgsConstructor
-@Builder(toBuilder = true)
-public class Menu {
-	
-	@Id private Integer systemId;
+@Table(name= "opfunc")
+@IdClass(OperatorFunctionId.class)
+@Data @Builder(toBuilder = true)
+@AllArgsConstructor 
+public class OperatorFunction {
 
+	@Id private Integer operatorId; //employee Id
+	@Id private Integer functionId;
+	@Id private Integer systemId;
 	@Id private Integer subSystemId;
 	
-	@Id private Integer functionId;
-	
-	private String functionName;
-	
-	private String route;
-	
-	//private String menu;
-
- 	private LocalDateTime   createdDate;
+	private LocalDateTime   createdDate;
 	@Column(length=30)
  	private String	    	createdBy;
 	

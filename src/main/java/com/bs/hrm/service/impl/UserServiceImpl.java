@@ -88,8 +88,8 @@ public class UserServiceImpl implements UserService{
 			List<MenuPermission> menuPermissionList =
 					menuPermissionService.getAllMenuByRoleId(role.getRoleId());
 			for(MenuPermission mp : menuPermissionList) {
-				Menu menu = menuService.getMenu(mp.getMenuId());
-				menuSet.add(menu);
+//				Menu menu = menuService.getMenu(mp.getMenuId());
+//				menuSet.add(menu);
 			}
 		}
 		return menuSet;

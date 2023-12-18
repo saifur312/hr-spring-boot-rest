@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bs</groupId>
-	<artifactId>hrm-rest</artifactId>
+	<artifactId>hr-spring-boot-rest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>hrm</name>
 	<description>Human Resource Management</description>

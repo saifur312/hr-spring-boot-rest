@@ -124,9 +124,9 @@ public class EmployeeTestController {
 
 		System.out.println("Menu Set " + user.getUserMenuSet());
 		List<String> menuList = new ArrayList<String>();
-		for(Menu m : user.getUserMenuSet()) {
-			menuList.add(m.getMenu());
-		}
+//		for(Menu m : user.getUserMenuSet()) {
+//			menuList.add(m.getMenu());
+//		}
 		
 		String[] menuArray = menuList.toArray(new String[0]);
 		System.out.println(Arrays.toString(menuArray));
