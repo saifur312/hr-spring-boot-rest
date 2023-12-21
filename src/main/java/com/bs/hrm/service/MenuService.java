@@ -23,4 +23,6 @@ public interface MenuService {
 	public List<Object[]> getAllFunctionIdAndNameofSubSystemOfSystem(Integer systemId, Integer subSystemId);
 	
 	public List<Object[]> getAllSystemWithSubSystemsAndFunctions();
+	
+	public List<Menu> getAllFunction();
 }

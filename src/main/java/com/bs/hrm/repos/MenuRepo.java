@@ -47,4 +47,8 @@ public interface MenuRepo extends JpaRepository<Menu, MenuId>{
 			+ " m.systemId =:systemId and m.subSystemId !=0 group by"
 			+ " m.subSystemId order by m.functionName")
 	public List<Object[]> findAllSubSystemIdWithName(@Param("systemId") Integer systemId);
+	
+	@Query(value = "SELECT * FROM hrdb.menu where function_id > 0 order by function_name asc;",
+			  nativeQuery = true)
+	public List<Menu> findAllFunction();
 }

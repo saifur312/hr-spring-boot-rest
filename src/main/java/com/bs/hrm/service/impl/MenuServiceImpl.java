@@ -122,5 +122,11 @@ public class MenuServiceImpl implements MenuService{
 		return null;
 	}
 
+	@Override
+	public List<Menu> getAllFunction() {
+		
+		return menuRepo.findAllFunction();
+	}
+
 
 }

@@ -13,12 +13,13 @@ import com.bs.hrm.entity.ids.OperatorFunctionId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name= "opfunc")
 @IdClass(OperatorFunctionId.class)
 @Data @Builder(toBuilder = true)
-@AllArgsConstructor 
+@AllArgsConstructor @NoArgsConstructor
 public class OperatorFunction {
 
 	@Id private Integer operatorId; //employee Id

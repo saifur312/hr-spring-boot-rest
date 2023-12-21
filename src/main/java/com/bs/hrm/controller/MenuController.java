@@ -64,7 +64,7 @@ public class MenuController {
 //	}
 	
     @PostMapping("save-system")
-    public Menu saveSystem(@RequestBody Map<String, Object> payload) {
+    public Menu saveSystem(@RequestBody Map<String, String> payload) {
         String functionName = (String) payload.get("functionName");
 		logger.info("function Name\t" + functionName);
 		Menu savedMenu = menuService.addSystem(functionName);
@@ -78,7 +78,7 @@ public class MenuController {
 	}
 	
 	@PostMapping("save-sub-system")
-	public Menu saveSubSystem(@RequestBody Map<String, Object> payload) {
+	public Menu saveSubSystem(@RequestBody Map<String, String> payload) {
 		String functionName = payload.get("functionName").toString();
 		Integer systemId =Integer.parseInt(payload.get("systemId").toString());
 		logger.info("systemId\t" + systemId + "  function Name\t" + functionName);
@@ -102,10 +102,15 @@ public class MenuController {
 		//return null;
 	}
 	
+//	@GetMapping("function-list")
+//	public List<bject[]> getAllFunction(@RequestParam int systemId, int subSystemId){
+//		
+//		return null;
+//	}
+	
 	@GetMapping("function-list")
-	public List<Object[]> getAllFunction(@RequestParam int systemId, int subSystemId){
-		//
-		return null;
+	public List<Menu> showAllFunction(){
+		return menuService.getAllFunction();
 	}
 	
 	
