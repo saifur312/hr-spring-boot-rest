@@ -12,7 +12,7 @@ public interface MenuService {
 	
 	public Menu addSubSystem(Integer systemId, String subSystemName);
 	
-//	public Menu getMenu(Long menuId);
+	public Menu getMenu(Integer systemId, Integer subSystemId, Integer functionId);
 	
 	public List<Menu> getAllMenu();
 	

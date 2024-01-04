@@ -128,5 +128,16 @@ public class MenuServiceImpl implements MenuService{
 		return menuRepo.findAllFunction();
 	}
 
+	@Override
+	public Menu getMenu(Integer systemId, Integer subSystemId, Integer functionId) {
+		Optional<Menu> menuOpt = menuRepo
+				.findBySystemIdAndSubSystemIdAndFunctionId(
+						systemId, subSystemId, functionId);
+		if(menuOpt.isPresent())
+			return menuOpt.get();
+		else
+			return null;
+	}
+
 
 }

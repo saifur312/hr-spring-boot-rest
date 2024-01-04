@@ -32,7 +32,7 @@ import com.bs.hrm.service.UserService;
 import com.bs.sms.SmsController;
 
 @RestController
-public class EmployeeTestController {
+public class UserController {
 	@Autowired UserService	userService;
 	@Autowired EmployeeService	employeeService;
 
@@ -93,7 +93,7 @@ public class EmployeeTestController {
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("verify-login")
-	public Boolean verifyLogin( @RequestBody EmployeeTest request)  {
+	public User verifyLogin( @RequestBody EmployeeTest request)  {
 		//String userId = request.getUserId();
 		Long userId = Long.parseLong(request.getUserId());
 		String loginCode = request.getLoginCode();
@@ -109,10 +109,13 @@ public class EmployeeTestController {
 				break;
 			}
 		}
-		System.out.println("userId:\t" + userId+ "\tloginCode:\t" + loginCode);
-
-		System.out.println("isVerified " + isVerified);
-		return isVerified;
+		System.out.println("userId:\t" + userId+ "\tloginCode:\t"
+				+ loginCode +"isVerified " + isVerified);
+		
+		User user = new User();
+		user.setUserId(userId);
+		user.setVerified(isVerified);
+		return user;
 	}
 	
 	

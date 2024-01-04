@@ -1,6 +1,7 @@
 package com.bs.hrm.repos;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,6 +17,8 @@ import com.bs.hrm.entity.ids.MenuId;
 public interface MenuRepo extends JpaRepository<Menu, MenuId>{
 
 	//public Menu	findTopBySystemIdOrderBySystemIdDesc(int systemId);
+	public Optional<Menu>	findBySystemIdAndSubSystemIdAndFunctionId(Integer systemId,
+			Integer subSystemId, Integer functionId);
 	
 //	select system_id from hrdb.menu group by system_id desc;
 	@Query(value = "select system_id from hrdb.menu group by system_id desc limit 1", 

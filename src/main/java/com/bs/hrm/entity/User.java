@@ -32,6 +32,9 @@ public class User {
 	private String email;
 	
 	@Transient
+	private Boolean verified;
+	
+	@Transient
 	private Set<Role> userRoleSet;
 	
 	@Transient
