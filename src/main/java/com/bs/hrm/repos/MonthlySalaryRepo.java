@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.bs.hrm.entity.MonthlySalaryEntity;
 import com.bs.hrm.entity.ids.MonthlySalaryEntityId;
@@ -48,10 +49,10 @@ public interface MonthlySalaryRepo extends JpaRepository<MonthlySalaryEntity, Mo
 			+ "FROM MonthlySalaryEntity m WHERE m.departmentId=:departmentId group by m.month")
 	public String[][] findTotalByDepartment(Integer departmentId);
 	
-	@Query("SELECT m.month, SUM(m.basicSalary), SUM(m.overtimeAmount), SUM(m.allowance),"
+	@Query("SELECT SUM(m.basicSalary), SUM(m.overtimeAmount), SUM(m.allowance),"
 			+ " SUM(m.totalSalary), SUM(m.loanDeduction), SUM(m.netSalary) "
-			+ "FROM MonthlySalaryEntity m group by m.month")
-	public Double[][] findTotalMonthlySalaray();
+			+ "FROM MonthlySalaryEntity m where m.month=:month")
+	public Double[][] findTotalMonthlySalaray(@Param("month") Integer month);
 	 
 	 
 }

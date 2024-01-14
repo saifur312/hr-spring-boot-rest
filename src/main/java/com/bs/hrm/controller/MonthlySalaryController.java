@@ -1,5 +1,6 @@
 package com.bs.hrm.controller;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -124,9 +126,8 @@ public class MonthlySalaryController {
 //		return "salary/monthly-salary/monthly-salary-line-chart.html";
 //	}
 
-	private Map<String, Double> getMonthlySalry() {
-
-		Double[][] query2D = monthlySalaryRepo.findTotalMonthlySalaray();
+	private Map<String, Double> getMonthlySalry(int month) {
+		Double[][] query2D = monthlySalaryRepo.findTotalMonthlySalaray(month);
 		Map<String, Double> monthlySalaryList = new LinkedHashMap<>();
 		for (Double[] row : query2D) {
 			monthlySalaryList.put("Basic", row[0]);
@@ -136,12 +137,18 @@ public class MonthlySalaryController {
 			monthlySalaryList.put("Loan Deduction", row[4]);
 			monthlySalaryList.put("Net Salary", row[5]);
 		}
+		for(String salary : monthlySalaryList.keySet()) {
+			String key = salary.toString();
+			String value = monthlySalaryList.get(salary).toString();
+			System.out.println(key + ' ' + value);
+		}
 		return monthlySalaryList;
 	}
 	
 	@GetMapping("monthly-salary-bar-chart")
-	public Map<String, Double>  showMonthlySalaryBarChart() {
-		return getMonthlySalry();
+	public Map<String, Double>  showMonthlySalaryBarChart(@RequestParam int month) {
+		System.out.println("Month number " + month);
+		return getMonthlySalry(month);
 	}
 
 }
