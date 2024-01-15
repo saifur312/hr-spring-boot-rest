@@ -114,7 +114,12 @@ public class UserController {
 		
 		User user = new User();
 		user.setUserId(userId);
-		user.setVerified(isVerified);
+		/*** If we want to go with verification code process then uncomment this line***/
+		//user.setVerified(isVerified);
+		
+		/*** to avoid verification code we set isVerified true by default***/
+		user.setVerified(true);
+		
 		return user;
 	}
 	
