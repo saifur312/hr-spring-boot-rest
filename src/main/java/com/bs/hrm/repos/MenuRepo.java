@@ -26,12 +26,12 @@ public interface MenuRepo extends JpaRepository<Menu, MenuId>{
 	public Integer findLastSystemId();
 	
 	@Query(value = "select sub_system_id from hrdb.menu where system_id =:systemId"
-			+ " group by sub_system_id desc limit 1;", 
+			+ " order by sub_system_id desc limit 1;", 
 			  nativeQuery = true)
 	public Integer findLastSubSystemIdOfSystemId(@Param("systemId") Integer systemId);
 	
 	@Query(value = "select function_id from hrdb.menu where system_id=:systemId"
-			+ " and sub_system_id=:subSystemId group by function_id desc limit 1;", 
+			+ " and sub_system_id=:subSystemId order by function_id desc limit 1;", 
 			  nativeQuery = true)
 	public Integer findLastFunctionIdOfSystemIdAndSubSystemId(
 			@Param("systemId") Integer systemId, @Param("subSystemId") Integer subSystemId);
